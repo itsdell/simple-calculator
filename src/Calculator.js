@@ -5,7 +5,8 @@ export default class Calculator extends React.Component {
         first: 0,
         second: 0,
         result: 0,
-        operator: ''
+        operator: '',
+        isFloat: false
     }
 
     constructor(props) {
@@ -42,6 +43,10 @@ export default class Calculator extends React.Component {
         this.setState({operator: event.target.value});        
     }
 
+    handleDotClick = (event) => {
+        console.log(event.target.value);
+    }
+
     computeResult = () => {
         const {operator, first, second} = this.state;
         let result = 0;
@@ -68,21 +73,31 @@ export default class Calculator extends React.Component {
     }
 
     render() {
-        let numbers = [...Array(10).keys()];
+        // let numbers = [...Array(10).keys()].reverse();
+        let numbers = [7,8,9,4,5,6,1,2,3];
 
-        return <div>
-            <div style={{"display": "block"}}>{this.state.second || this.state.first}</div>
+        return <div className='calculator'>
+            <div className='screen'>{this.state.second || this.state.first}</div>
             
-            {numbers.map(number => <button key={number} value={number} onClick={this.handleNumberClick}>
-                {number}
-            </button>)}
+            <div className='buttons'>
+                <div className='numbers'>
+                    {numbers.map(number => <button key={number} value={number} onClick={this.handleNumberClick}>
+                        {number}
+                    </button>)}
+                    <button onClick={this.reset}>AC</button>
+                    <button value='0' onClick={this.handleNumberClick}>0</button>
+                    <button value='dot' onClick={this.handleDotClick}>.</button>
+                </div>
 
-            <button value='add' onClick={this.handleOperatorClick}>+</button>
-            <button value='subtract' onClick={this.handleOperatorClick}>-</button>
-            <button value='multiply' onClick={this.handleOperatorClick}>&times;</button>
-            <button value='divide' onClick={this.handleOperatorClick}>÷</button>
-            <button onClick={this.computeResult}>=</button>
-            <button onClick={this.reset}>AC</button>
+                <div className='operators'>
+                    <button value='add' onClick={this.handleOperatorClick}>+</button>
+                    <button value='subtract' onClick={this.handleOperatorClick}>-</button>
+                    <button value='multiply' onClick={this.handleOperatorClick}>&times;</button>
+                    <button value='divide' onClick={this.handleOperatorClick}>÷</button>
+                </div>
+            </div>
+
+            <button className='equals' onClick={this.computeResult}>=</button>
         </div>
     }
 }
