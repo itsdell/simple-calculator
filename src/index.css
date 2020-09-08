@@ -5,6 +5,7 @@ button {
   border: 1px solid whitesmoke;
   background: dodgerblue;
   color: white;
+  outline: none;
 }
 
 button:hover {
