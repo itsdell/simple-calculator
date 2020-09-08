@@ -40,6 +40,7 @@ export default class Calculator extends React.Component {
     }
 
     handleOperatorClick = (event) => {
+        if (this.state.second) this.computeResult();
         this.setState({operator: event.target.value});        
     }
 
